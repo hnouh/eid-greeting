@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>بطاقة تهنئة بعيد الأضحى</title>
+    <style>
+      @font-face {
+        font-family: "FuturaPT";
+        src: url("https://hnouh.github.io/eid-greeting/futura%20medium%20bt.woff")
+          format("woff");
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: "ArbFONTS-GE-Flow";
+        src: url("https://hnouh.github.io/eid-greeting/ArbFONTS-GE-Flow-Regular.woff")
+          format("woff");
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      body {
+        text-align: center;
+        direction: rtl;
+        color: #333;
+        margin: 0;
+      }
+      .bigContainer {
+        background: linear-gradient(to bottom, #f5f0e1);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 100px;
+        width: 100%;
+      }
+      .sticky-header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background-color: #fdf6ec;
+        padding: 15px 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      }
+
+      .header-grid {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        text-align: center;
+        gap: 10px;
+      }
+      .logo {
+        width: 15em;
+        height: 4.5em;
+        justify-self: start;
+      }
+
+      /* header in center*/
+      .header-grid h2 {
+        font-size: 24px;
+        color: #003f5c;
+        margin: 0;
+        justify-self: center;
+      }
+
+      .header-title {
+        text-align: center;
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      h2 {
+        font-family: "ArbFONTS-GE-Flow", "FuturaPT" !important;
+
+        color: #003f5c;
+        font-size: 1.2vw;
+        margin: 0;
+      }
+
+      p {
+        font-family: "ArbFONTS-GE-Flow", "FuturaPT" !important;
+        font-size: 1vw;
+      }
+
+      input {
+        font-family: "ArbFONTS-GE-Flow", "FuturaPT" !important;
+        font-size: 1vw;
+        padding: 10px;
+        width: 80%;
+        max-width: 300px;
+        border: 2px solid #8b4513;
+        border-radius: 10px;
+        margin-top: 10px;
+      }
+
+      button {
+        font-family: "ArbFONTS-GE-Flow", "FuturaPT" !important;
+        font-size: 1vw;
+        margin-top: 15px;
+        padding: 10px 20px;
+        background-color: #8b4513;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #a0522d;
+      }
+
+      canvas {
+        margin-top: 30px;
+        border-radius: 15px;
+        max-width: 100%;
+        height: auto;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      }
+      #greetingCanvas {
+        width: 300px;
+        height: 600px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      #downloadLink {
+        display: inline-block;
+        margin-top: 20px;
+        font-size: 1vw;
+        text-decoration: none;
+        color: #ffff;
+        background-color: #8b4513;
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-family: "ArbFONTS-GE-Flow", "FuturaPT" !important;
+      }
+      #downloadLink:hover {
+        background-color: #a0522d;
+      }
+      #muteBtn {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        z-index: 2000;
+        background-color: #fff;
+        border: 2px solid #c89f2d;
+        border-radius: 50%;
+        font-size: 18px;
+        padding: 6px 10px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .post-content {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+      }
+      .audio-control {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        background-color: transparent;
+        border: none;
+        padding: 4px 8px;
+        font-size: 12px;
+        color: #003f5c;
+        font-family: "ArbFONTS-GE-Flow", sans-serif;
+        cursor: pointer;
+      }
+
+      .audio-icon {
+        font-size: 14px;
+      }
+
+      .audio-text {
+        font-size: 12px;
+        white-space: nowrap;
+      }
+
+      @media screen and (min-width: 768px) and (max-width: 1023px) {
+        .bigContainer {
+          gap: 20px;
+        }
+        p,
+        input,
+        button,
+        #downloadLink {
+          font-size: 2vw;
+        }
+      }
+
+      @media (max-width: 767px) {
+        p,
+        input,
+        button,
+        #downloadLink {
+          font-size: 5vw;
+        }
+        .header-grid {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+          gap: 10px;
+          flex-wrap: wrap;
+          padding: 0 10px;
+        }
+        .header-title {
+          flex: 1 1 100%;
+          text-align: center;
+          margin-top: 10px;
+        }
+
+        .header-title h2 {
+          font-size: 4.5vw;
+          max-width: 90vw;
+          margin: 5px auto;
+          line-height: 1.5;
+        }
+        .logo {
+          height: 45px;
+          max-width: 40%;
+        }
+        #muteBtn {
+          top: -80px;
+          left: 80px;
+        }
+        .bigContainer {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          gap: 10px;
+          padding-top: 10%;
+        }
+        .audio-control {
+          position: absolute;
+          top: 10px;
+          left: 10px;
+          font-size: 14px;
+          padding: 4px 8px;
+        }
+
+        .audio-text {
+          font-size: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="audio-control" onclick="toggleMute()">
+      <span class="audio-icon">🔊</span>
+      <span class="audio-text">سماع التكبيرات - Takbeerat</span>
+    </div> 
+    <div class="bigContainer">
+      <div class="rightContainer">
+        <p></p>
+        <p>أدخل اسمك بالعربي واحصل على بطاقة تهنئة خاصة بك:</p>
+        <input type="text" id="nameAr" placeholder="مثال: حسن نوح" />
+        <p></p>
+        <p dir="ltr">
+          Enter your name to get a personalized Eid greeting card:
+        </p>
+        <input
+          dir="ltr"
+          type="text"
+          id="nameEn"
+          placeholder="e.g. Hasan Nouh"
+        />
+        <br />
+        <button id="generateBtn" onclick="generateCard()" disabled>
+          إنشاء البطاقة - Create Card
+        </button>
+        <br />
+      </div>
+      <div class="lefttContainer">
+        <canvas id="greetingCanvas" width="1080px" height="1920px"></canvas>
+        <br />
+        <a id="downloadLink" download="بطاقة_عيد_الأضحى.png"
+          >تحميل البطاقة - Download Card</a
+        >
+        <p></p>
+      </div>
+    </div>
+
+    <audio id="takbeerat" loop>
+      <source
+        src="https://archive.org/download/eid-takbeerat-haramain/1433.mp3"
+        type="audio/mpeg"
+      />
+    </audio>
+    <script>
+      const canvas = document.getElementById("greetingCanvas");
+      const ctx = canvas.getContext("2d");
+      const image = new Image();
+      image.crossOrigin = "anonymous";
+      image.src =
+        "https://raw.githubusercontent.com/hnouh/eid-greeting/main/Alesayi%20greeting.jpg"; //  صورة القالب
+      image.onload = () =>
+        ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+      const audio = document.getElementById("takbeerat");
+      //let audioStarted = false;
+
+      function startAudioOnce() {
+        if (!audioStarted) {
+          audio.play().catch(() => {});
+          audioStarted = true;
+          document.getElementById("muteBtn").innerText = "🔊";
+        }
+      }
+
+      function generateCard() {
+        const nameAr = document.getElementById("nameAr").value.trim();
+        const nameEn = document.getElementById("nameEn").value.trim();
+
+        // إعادة رسم الخلفية
+        ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#00000";
+        ctx.textAlign = "center"; 
+
+        // المسافة الرأسية السفلية من أسفل البطاقة
+        let y = canvas.height - 350;
+
+        if (nameAr) {
+          ctx.font = "60px 'ArbFONTS-GE-Flow'"; // خط كبير يناسب الدقة العالية
+          ctx.fillText(`${nameAr}`, canvas.width / 2, y);
+          y += 75; // مسافة بين السطرين
+        }
+
+        if (nameEn) {
+          ctx.font = "56px 'FuturaPT'";
+          ctx.fillText(`${nameEn}`, canvas.width / 2, y);
+        }
+        const downloadLink = document.getElementById("downloadLink");
+        downloadLink.href = canvas.toDataURL("image/png");
+      }
+
+      let audioStarted = false;
+
+      function toggleMute() {
+        const icon = document.querySelector(".audio-icon");
+        const text = document.querySelector(".audio-text");
+
+        if (!audioStarted) {
+          audio.play().catch(() => {});
+          audioStarted = true;
+          icon.textContent = "🔇 إيقاف الصوت - Mute";
+          if (text) text.style.display = "none";
+        } else {
+          if (audio.paused) {
+            audio.play().catch(() => {});
+            icon.textContent = "🔇 إيقاف الصوت - Mute";
+            if (text) text.style.display = "none";
+          } else {
+            audio.pause();
+            icon.textContent = "🔊";
+            if (text) {
+              text.textContent = "سماع التكبيرات - Takbeerat";
+              text.style.display = "inline";
+            }
+          }
+        }
+      }
+
+      const nameArInput = document.getElementById("nameAr");
+      const nameEnInput = document.getElementById("nameEn");
+      const generateBtn = document.getElementById("generateBtn");
+
+      function checkInputs() {
+        const hasInput =
+          nameArInput.value.trim() !== "" || nameEnInput.value.trim() !== "";
+        generateBtn.disabled = !hasInput;
+      }
+
+      nameArInput.addEventListener("input", () => { 
+        checkInputs();
+      });
+
+      nameEnInput.addEventListener("input", () => { 
+        checkInputs();
+      });
+
+      // لمنع التحميل إذا لم يتم الإدخال
+      function generateCard() {
+        if (generateBtn.disabled) return;
+
+        const nameAr = nameArInput.value.trim();
+        const nameEn = nameEnInput.value.trim();
+
+        ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#000";
+        ctx.textAlign = "center";
+
+        let y = canvas.height - 350;
+        if (nameAr) {
+          ctx.font = "60px 'ArbFONTS-GE-Flow'";
+          ctx.fillText(nameAr, canvas.width / 2, y);
+          y += 75;
+        }
+        if (nameEn) {
+          ctx.font = "56px 'FuturaPT'";
+          ctx.fillText(nameEn, canvas.width / 2, y);
+        }
+
+        const downloadLink = document.getElementById("downloadLink");
+        downloadLink.href = canvas.toDataURL("image/png");
+      }
+    </script>
+  </body>
+</html>
